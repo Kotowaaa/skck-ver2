@@ -36,33 +36,33 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
         // Route Satwil
     Route::get('/satwils', [AdminController::class, 'index'])->name('satwils');
-    Route::get('/satwils/{id}/edit', [AdminController::class, 'edit']);
-    Route::post('/satwils/{id}/update', [AdminController::class, 'update']);
-    Route::post('/satwils/{id}/destroy', [AdminController::class, 'destroy']);
+    Route::get('/satwils/{id}/edit', [AdminController::class, 'edit'])->name('edit');
+    Route::post('/satwils/{id}/update', [AdminController::class, 'update'])->name('update');
+    Route::post('/satwils/{id}/destroy', [AdminController::class, 'destroy'])->name('destroy');
 
         // Route dataDiri
     Route::get('/dataDiris', [AdminController::class, 'indexDiri'])->name('dataDiris');
-    Route::get('/dataDiris/{id}/edit', [AdminController::class, 'editDiri']);
-    Route::post('/dataDiris/{id}/update', [AdminController::class, 'updateDiri']);
-    Route::post('/dataDiris/{id}/destroy', [AdminController::class, 'destroyDiri']);
+    Route::get('/dataDiris/{id}/edit', [AdminController::class, 'editDiri'])->name('editDiris');
+    Route::post('/dataDiris/{id}/update', [AdminController::class, 'updateDiri'])->name('updateDiris');
+    Route::post('/dataDiris/{id}/destroy', [AdminController::class, 'destroyDiri'])->name('destroyDiris');
 
         // Route dataAyah
     Route::get('/dataAyahs', [AdminController::class, 'indexAyah'])->name('dataAyahs');
-    Route::get('/dataAyahs/{id}/edit', [AdminController::class, 'editAyah']);
-    Route::post('/dataAyahs/{id}/update', [AdminController::class, 'updateAyah']);
-    Route::post('/dataAyahs/{id}/destroy', [AdminController::class, 'destroyAyah']);
+    Route::get('/dataAyahs/{id}/edit', [AdminController::class, 'editAyah'])->name('editAyahs');
+    Route::post('/dataAyahs/{id}/update', [AdminController::class, 'updateAyah'])->name('updateAyahs');
+    Route::post('/dataAyahs/{id}/destroy', [AdminController::class, 'destroyAyah'])->name('destroyAyahs');
 
         // Route dataIbu
     Route::get('/dataIbus', [AdminController::class, 'indexIbu'])->name('dataIbus');
-    Route::get('/dataIbus/{id}/edit', [AdminController::class, 'editIbu']);
-    Route::post('/dataIbus/{id}/update', [AdminController::class, 'updateIbu']);
-    Route::post('/dataIbus/{id}/destroy', [AdminController::class, 'destroyIbu']);
+    Route::get('/dataIbus/{id}/edit', [AdminController::class, 'editIbu'])->name('editIbus');
+    Route::post('/dataIbus/{id}/update', [AdminController::class, 'updateIbu'])->name('updateIbus');
+    Route::post('/dataIbus/{id}/destroy', [AdminController::class, 'destroyIbu'])->name('destroyIbus');
 
         // Route SKCK
     Route::get('/skck', [AdminController::class, 'indexSKCK'])->name('skck');
-    Route::get('/skck/{id}/edit', [AdminController::class, 'editSKCK']);
-    Route::post('/skck/{id}/update', [AdminController::class, 'updateSKCK']);
-    Route::post('/skck/{id}/destroy', [AdminController::class, 'destroySKCK']);
+    Route::get('/skck/{id}/edit', [AdminController::class, 'editSKCK'])->name('editSkck');
+    Route::post('/skck/{id}/update', [AdminController::class, 'updateSKCK'])->name('updateSkck');
+    Route::post('/skck/{id}/destroy', [AdminController::class, 'destroySKCK'])->name('destroySkck');
 });
 
 Route::group(['middleware' => ['auth', 'checkrole:2']], function() {

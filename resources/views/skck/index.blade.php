@@ -35,7 +35,7 @@
                     <td class="text-white">{{ $skck->dibuat_tanggal }}</td>
                     <td class="text-white">{{ $skck->sampai_tanggal }}</td>
                     <td>
-                        <a href="" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
+                        <a href="{{ route('editSKCK', $skck) }}" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
                         <a href="" class="btn btn-danger btn-sm">Hapus!</a>
                     </td>
                 </tr>

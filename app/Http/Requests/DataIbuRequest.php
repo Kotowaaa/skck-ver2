@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\ServerStatus;
 use Illuminate\Validation\Rules\Enum;
-use App\Models\Satwil;
 
-class SatwilRequest extends FormRequest
+class DataIbuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,14 @@ class SatwilRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'satwil' => [
+            'nama' => [
                 'required'
             ],
-            'polres_id' => [
-                'required', 'integer'
-            ],
-            'polsek' => [
+            'umur' => [
                 'required'
+            ],
+            'agama' => [
+                new Enum(ServerStatus::class)
             ],
             'alamat' => [
                 'required'

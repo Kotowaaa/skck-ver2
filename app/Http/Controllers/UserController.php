@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SatwilRequest;
+use App\Http\Requests\DataDiriRequest;
+use App\Http\Requests\DataAyahRequest;
+use App\Http\Requests\DataIbuRequest;
+use App\Http\Requests\SkckRequest;
+
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Polres;
 use App\Models\Satwil;
+use App\Models\dataDiri;
+use App\Models\dataAyah;
+use App\Models\dataIbu;
+use App\Models\SKCK;
 
 class UserController extends Controller
 {
@@ -57,7 +67,7 @@ class UserController extends Controller
             $satwil->kelurahan_id = $data['kelurahan_id'];
             $satwil->save();
 
-            return redirect()->route('satwils.index')
+            return redirect()->route('createsDiri')
                             ->with('succes', 'Data Berhasil Ditambahkan !');
     }
 
@@ -76,7 +86,7 @@ class UserController extends Controller
         $kecamatan = Kecamatan::where('status','0')->get();
         $kabupaten = Kabupaten::where('status','0')->get();
         $kelurahan = Kelurahan::where('status','0')->get();
-        return view('dataPribadi.create', compact('provinsi', 'kecamatan', 'kabupaten', 'kelurahan'));
+        return view('dataDiri.create', compact('provinsi', 'kecamatan', 'kabupaten', 'kelurahan'));
     }
 
     /**
@@ -109,7 +119,7 @@ class UserController extends Controller
             $dataDiri->no_kartu_keluarga = $data['no_kartu_keluarga'];
             $dataDiri->save();
 
-            return redirect()->route('dataPribadis.index')
+            return redirect()->route('createsAyahs')
                             ->with('succes', 'Data Berhasil Ditambahkan !');
 
     }
@@ -138,7 +148,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeAyah(Request $request)
+    public function storeAyah(DataAyahRequest $request)
     {
         $data = $request->validated();
 
@@ -156,7 +166,7 @@ class UserController extends Controller
             $dataAyah->kelurahan_id = $data['kelurahan_id'];
                 $dataAyah->save();
 
-            return redirect()->route('dataAyahs.index')
+            return redirect()->route('createsIbus')
                             ->with('succes', 'Data Berhasil Ditambahkan !');
     }
 
@@ -184,7 +194,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeIbu(Request $request)
+    public function storeIbu(DataIbuRequest $request)
     {
         $data = $request->validated();
 
@@ -202,7 +212,50 @@ class UserController extends Controller
             $dataIbu->kelurahan_id = $data['kelurahan_id'];
                 $dataIbu->save();
 
-            return redirect()->route('dataIbus.index')
+            return redirect()->route('createsSKCK')
                             ->with('succes', 'Data Berhasil Ditambahkan !');
     }
+
+    /**
+     * Controller user SKCK
+     */
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createSKCK()
+    {
+        return view('skck.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeSKCK(SkckRequest $request)
+    {
+        $data = $request->validated();
+
+        $dataIbu = new SKCK();
+
+            $dataIbu->nama = $data['nama'];
+            $dataIbu->umur = $data['umur'];
+            $dataIbu->agama = $data['agama'];
+            $dataIbu->kewarganegaraan = $data['kewarganegaraan'];
+            $dataIbu->pekerjaan = $data['pekerjaan'];
+            $dataIbu->alamat = $data['alamat'];
+            $dataIbu->provinsi_id = $data['provinsi_id'];
+            $dataIbu->kecamatan_id = $data['kecamatan_id'];
+            $dataIbu->kabupaten_id = $data['kabupaten_id'];
+            $dataIbu->kelurahan_id = $data['kelurahan_id'];
+                $dataIbu->save();
+
+            return redirect()->route('createsSkck')
+                            ->with('succes', 'Data Berhasil Ditambahkan !');
+    }
+
 }

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.home')
 
 @section('content')
 <div class="text">
@@ -9,7 +9,7 @@
 
 <div class="card bg-dark row h-auto">
     <div class="card-body col">
-        <form action="{{ route('dataPribadis.store') }}" method="post">
+        <form action="{{ route('storesDiri') }}" method="post">
             <div class="col-auto mb-3">
                 <label for="nama" class="form-label text-white">Nama Lengkap</label>
                 <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan Nama Lengkap!">

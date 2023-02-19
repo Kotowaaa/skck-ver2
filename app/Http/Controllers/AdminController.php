@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\SatwilRequest;
+use App\Http\Requests\DataDiriRequest;
+use App\Http\Requests\DataAyahRequest;
+use App\Http\Requests\DataIbuRequest;
+use App\Http\Requests\SkckRequest;
+
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
@@ -52,8 +57,8 @@ class AdminController extends Controller
         $kabupaten = Kabupaten::where('status','0')->get();
         $kecamatan = Kecamatan::where('status','0')->get();
         $kelurahan = Kelurahan::where('status','0')->get();
-        $satwil = Satwil::findOrFail($id);
-        return view('satwils.edit', compact('satwil','provinsi', 'polres', 'kecamatan', 'kabupaten', 'kelurahan'));
+        $satwils = Satwil::findOrFail($id);
+        return view('satwil.edit', compact('satwils','provinsi', 'polres', 'kecamatan', 'kabupaten', 'kelurahan'));
     }
 
     /**
@@ -67,19 +72,19 @@ class AdminController extends Controller
     {
         $data = $request->validated();
 
-        $Satwil = Satwil::find($id);
+        $satwils = Satwil::find($id);
 
-        $Satwil->satwil = $data['satwil'];
-        $Satwil->polres = $data['polres_id'];
-        $Satwil->polsek = $data['polsek'];
-        $Satwil->alamat = $data['alamat'];
-        $Satwil->rt = $data['rt'];
-        $Satwil->rw = $data['rw'];
-        $Satwil->provinsi_id = $data['provinsi_id'];
-        $Satwil->kecamatan = $data['kecamatan_id'];
-        $Satwil->kabupaten = $data['kabupaten_id'];
-        $Satwil->kelurahan = $data['kelurahan_id'];
-        $Satwil->update();
+        $satwils->satwil = $data['satwil'];
+        $satwils->polres_id = $data['polres_id'];
+        $satwils->polsek = $data['polsek'];
+        $satwils->alamat = $data['alamat'];
+        $satwils->rt = $data['rt'];
+        $satwils->rw = $data['rw'];
+        $satwils->provinsi_id = $data['provinsi_id'];
+        $satwils->kecamatan_id = $data['kecamatan_id'];
+        $satwils->kabupaten_id = $data['kabupaten_id'];
+        $satwils->kelurahan_id = $data['kelurahan_id'];
+        $satwils->update();
 
         return redirect()->route('satwils')
                         ->with('succes', 'Data Berhasil Ditambahkan !');
@@ -94,8 +99,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $Satwil = Satwil::find($id);
-        $Satwil->delete();
+        $satwil = Satwil::find($id);
+        $satwil->delete();
 
         return redirect()->route('satwils')
                         ->with('succes', 'Data Berhasil DiHapus !');
@@ -143,7 +148,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateDiri(dataDiriRequest $request, $id)
+    public function updateDiri(DataDiriRequest $request, $id)
     {
         $data = $request->validated();
 
@@ -228,7 +233,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateAyah(dataAyahRequest $request, $id)
+    public function updateAyah(DataAyahRequest $request, $id)
     {
         $data = $request->validated();
 
@@ -307,7 +312,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateIbu(dataIbuRequest $request, $id)
+    public function updateIbu(DataIbuRequest $request, $id)
     {
         $data = $request->validated();
 
@@ -379,7 +384,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateSKCK(SKCKRequest $request, $id)
+    public function updateSKCK(SkckRequest $request, $id)
     {
         $data = $request->validated();
 

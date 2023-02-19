@@ -80,14 +80,14 @@
                 <div class="row mb-3 col-auto">
                     <div class="col">
                         <label for="rt" class="form-label text-white">RT ( Sesuai KTP ) </label>
-                        <input type="number" name="rt" class="form-control" placeholder="Rt" aria-label="Rt">
+                        <input type="number" name="rt" class="form-control" value="{{ old('rt') }}" placeholder="Rt" aria-label="Rt">
                         @foreach ($errors->get('rt') as $msg)
                         <p class="text-danger">{{ $msg }}</p>
                         @endforeach
                     </div>
                     <div class="col">
                         <label for="rw" class="form-label text-white">RW ( Sesuai KTP ) </label>
-                        <input type="number" name="rw" class="form-control" placeholder="Rw" aria-label="Rw">
+                        <input type="number" name="rw" class="form-control" value="{{ old('rw') }}" placeholder="Rw" aria-label="Rw">
                         @foreach ($errors->get('rw') as $msg)
                         <p class="text-danger">{{ $msg }}</p>
                         @endforeach

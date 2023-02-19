@@ -45,8 +45,8 @@
                     <td class="text-white">{{ $satwil->kabupaten->name }}</td>
                     <td class="text-white">{{ $satwil->kelurahan->name }}</td>
                     <td>
-                        <a href="" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
-                        <a href="" class="btn btn-danger btn-sm">Hapus!</a>
+                        <a href="{{ route('edit', $satwil->id) }}" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
+                        <a href="{{ route('destroy', $satwil->id) }}" class="btn btn-danger btn-sm">Hapus!</a>
                     </td>
                 </tr>
                 @endforeach
