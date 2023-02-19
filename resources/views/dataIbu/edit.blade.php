@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.home')
 
 @section('content')
 
@@ -8,9 +8,10 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
-        <form action="" method="post">
+<div class="card bg-dark row mb-5 mt-2">
+    <div class="card-body">
+        <form action="{{ route('updateIbus', $dataIbu->id) }}" method="post">
+            @csrf
             <div class="col-auto mb-3">
                 <label for="satwil" class="form-label text-white">Nama lengkap</label>
                 <input type="text" name="nama" value="{{ $dataIbu->nama }}" id="nama" class="form-control" placeholder="Masukkan nama lengkap!">
@@ -34,11 +35,11 @@
             <div class="row col-auto mb-3">
                 <label for="kewarganegaraan" class="form-label text-white">Kewarganegaraan</label>
                 <div class="col">
-                    <input type="radio" name="kewarganegaraan" id="kewarganegaraan" value="{{ $dataIbu->kewarganegaraan }}" class="form-check-input">
+                    <input type="radio" name="kewarganegaraan" id="kewarganegaraan" value="WNI" {{ $dataIbu->kewarganegaraan == 'WNI' ? 'checked' : ''}} class="form-check-input">
                     <label for="wni" class="form-label text-white">WNI</label>
                 </div>
                 <div class="col" style="margin-right: 930px;">
-                    <input type="radio" name="kewarganegaraan" id="kewarganegaraan" value="{{ $dataIbu->kewarganegaraan }}" class="form-check-input">
+                    <input type="radio" name="kewarganegaraan" id="kewarganegaraan" value="WNA" {{ $dataIbu->kewarganegaraan == 'WNA' ? 'checked' : ''}} class="form-check-input">
                     <label for="wna" class="form-label text-white">WNA</label>
                 </div>
             </div>

@@ -8,8 +8,8 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
         <form action="{{ route('stores') }}" method="post">
             @csrf
             <div class="col-auto mb-3">

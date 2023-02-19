@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.home')
 
 @section('content')
 <div class="text">
@@ -7,12 +7,13 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
-        <form action="{{ route('dataPribadis.store') }}" method="post">
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
+        <form action="{{ route('storesDiri') }}" method="post">
+            @csrf
             <div class="col-auto mb-3">
                 <label for="nama" class="form-label text-white">Nama Lengkap</label>
-                <input type="text" name="nama" value="{{ $dataDiri->nama }}" id="nama" class="form-control" placeholder="Masukkan Nama Lengkap!">
+                <input type="text" name="namaDiri" value="{{ $dataDiri->namaDiri }}" id="nama" class="form-control" placeholder="Masukkan Nama Lengkap!">
             </div>
             <div class="col-auto mb-3">
                 <label for="tempat_lahir" class="form-label text-white">Tempat Lahir</label>
@@ -33,8 +34,8 @@
                 </div>
                 <div class="col">
                     <label for="status" class="form-label text-white">Status Pernikahan</label>
-                    <select class="form-select" name="status" aria-label="Default select example">
-                        <option selected disabled>{{ $dataDiri->status }}</option>
+                    <select class="form-select" name="status_pernikahan" aria-label="Default select example">
+                        <option selected disabled>{{ $dataDiri->status_pernikahan }}</option>
                         <option value="Nikah">Nikah</option>
                         <option value="Belum Nikah">Belum Nikah</option>
                     </select>
@@ -89,7 +90,7 @@
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Provinsi ( Sesuai KTP ) </label>
                     <select class="form-select" name="provinsi_id" aria-label="Default select example">
-                        @foreach ($provinsi as $pro)
+                        @foreach ($p as $pro)
                         <option value="{{ $pro->id }}" {{ $dataDiri->provinsi_id == $pro->id ? 'selected' : '' }}>
                             {{ $pro->name }}
                         </option>
@@ -102,7 +103,7 @@
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Kecamatan ( Sesuai KTP ) </label>
                     <select class="form-select" name="kecamatan_id" aria-label="Default select example">
-                        @foreach ($kecamatan as $keca)
+                        @foreach ($k as $keca)
                         <option value="{{ $keca->id }}" {{ $dataDiri->kecamatan_id == $keca->id ? 'selected' : '' }}>
                             {{ $keca->name }}
                         </option>
@@ -115,7 +116,7 @@
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Kabupaten / Kota ( Sesuai KTP ) </label>
                     <select class="form-select" name="kabupaten_id" aria-label="Default select example">
-                        @foreach ($kabupaten as $kabu)
+                        @foreach ($ka as $kabu)
                         <option value="{{ $kabu->id }}" {{ $dataDiri->kabupaten_id == $kabu->id ? 'selected' : '' }}>
                             {{ $kabu->name }}
                         </option>
@@ -128,7 +129,7 @@
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Kelurahan ( Sesuai KTP ) </label>
                     <select class="form-select" name="kelurahan_id" aria-label="Default select example">
-                        @foreach ($kelurahan as $kelu)
+                        @foreach ($ke as $kelu)
                         <option value="{{ $kelu->id }}" {{ $dataDiri->kelurahan_id == $kelu->id ? 'selected' : '' }}>
                             {{ $kelu->name }}
                         </option>
@@ -141,7 +142,7 @@
                 <div class="row col-auto mb-3">
                     <div class="col">
                         <label for="no_telp" class="form-label text-white">No. E-KTP</label>
-                        <input type="number" value="{{ $dataDiri->no_e-ktp }}" name="no_e-ktp" id="no_e-ktp" class="form-control" placeholder="Masukkan No E-KTP!">
+                        <input type="number" value="{{ $dataDiri->no_e_ktp }}" name="no_e-ktp" id="no_e-ktp" class="form-control" placeholder="Masukkan No E-KTP!">
                     </div>
                     <div class="col">
                         <label for="no_telp" class="form-label text-white">No. Kartu Keluarga</label>

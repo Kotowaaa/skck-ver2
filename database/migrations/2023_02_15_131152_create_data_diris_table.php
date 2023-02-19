@@ -33,14 +33,14 @@ return new class extends Migration
                 'Karyawan Swasta',
                 'Wiraswasta'
             ]);
-            $table->integer('no_telp');
+            $table->string('no_telp');
             $table->mediumText('alamat');
             $table->integer('provinsi_id');
             $table->integer('kabupaten_id');
             $table->integer('kecamatan_id');
             $table->integer('kelurahan_id');
-            $table->integer('no_e_ktp');
-            $table->integer('no_kartu_keluarga');
+            $table->string('no_e_ktp');
+            $table->string('no_kartu_keluarga');
             $table->tinyInteger('status')->default('0');
             $table->timestamps();
         });

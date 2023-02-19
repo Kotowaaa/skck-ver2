@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('SKCK', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_skck');
-            $table->integer('no_ktp');
+            $table->string('no_skck');
+            $table->string('no_ktp');
             $table->mediumText('keperluan');
             $table->date('dibuat_tanggal');
             $table->date('sampai_tanggal');

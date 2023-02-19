@@ -7,8 +7,15 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
+@if ($message = Session::get('sukses'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ $message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
         <h2 class="text-white fw-bold mb-2 mt-2"> 
             List | Data Ibu
         </h2>
@@ -23,7 +30,6 @@
                     <th>Kewarganegaraan</th>
                     <th>Alamat</th>
                     <th>Pekerjaan</th>
-                    <th>Alamat</th>
                     <th>Provinsi</th>
                     <th>Kecamatan</th>
                     <th>Kabupaten</th>
@@ -41,28 +47,24 @@
                     <td class="text-white">{{ $dataIbu->kewarganegaraan }}</td>
                     <td class="text-white">{{ $dataIbu->alamat }}</td>
                     <td class="text-white">{{ $dataIbu->pekerjaan }}</td>
-                    <td class="text-white">{{ $dataIbu->provinsi->name }}</td>
-                    <td class="text-white">{{ $dataIbu->kecamatan->name }}</td>
-                    <td class="text-white">{{ $dataIbu->kabupaten->name }}</td>
-                    <td class="text-white">{{ $dataIbu->kelurahan->name }}</td>
+                    <td class="text-white">{{ $dataIbu->pro->name }}</td>
+                    <td class="text-white">{{ $dataIbu->kec->name }}</td>
+                    <td class="text-white">{{ $dataIbu->kabu->name }}</td>
+                    <td class="text-white">{{ $dataIbu->kelu->name }}</td>
                     <td>
-                        <a href="" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
-                        <a href="" class="btn btn-danger btn-sm">Hapus!</a>
+                        <a href="{{ route('editIbus', $dataIbu->id) }}" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
+                        <form action="{{ route('destroyIbus', $dataIbu->id) }}" method="post">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Apakah Yakin?')" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $dataIbus->links("pagination::bootstrap-5") }}
     </div>
-        <nav class="float-end" aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+
     </div>
 </div>
 @endsection

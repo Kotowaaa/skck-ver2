@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+    // Use Request
 use Illuminate\Http\Request;
 use App\Http\Requests\SatwilRequest;
 use App\Http\Requests\DataDiriRequest;
@@ -9,6 +10,7 @@ use App\Http\Requests\DataAyahRequest;
 use App\Http\Requests\DataIbuRequest;
 use App\Http\Requests\SkckRequest;
 
+    // Use Models
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
@@ -67,8 +69,7 @@ class UserController extends Controller
             $satwil->kelurahan_id = $data['kelurahan_id'];
             $satwil->save();
 
-            return redirect()->route('createsDiri')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+            return redirect()->route('createsDiri');
     }
 
     /**
@@ -97,15 +98,15 @@ class UserController extends Controller
      */
     public function storeDiri(DataDiriRequest $request)
     {
-        $data = $request->validate();
+        $data = $request->validated();
 
         $dataDiri = new dataDiri;
 
-            $dataDiri->nama = $data['nama'];
+            $dataDiri->namaDiri = $data['namaDiri'];
             $dataDiri->tempat_lahir = $data['tempat_lahir'];
             $dataDiri->tgl_lahir = $data['tgl_lahir'];
             $dataDiri->jenis_kelamin = $data['jenis_kelamin'];
-            $dataDiri->status = $data['status'];
+            $dataDiri->status_pernikahan = $data['status_pernikahan'];
             $dataDiri->kewarganegaraan = $data['kewarganegaraan'];
             $dataDiri->agama = $data['agama'];
             $dataDiri->pekerjaan = $data['pekerjaan'];
@@ -119,8 +120,7 @@ class UserController extends Controller
             $dataDiri->no_kartu_keluarga = $data['no_kartu_keluarga'];
             $dataDiri->save();
 
-            return redirect()->route('createsAyahs')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+            return redirect()->route('createsAyah');
 
     }
 
@@ -166,8 +166,7 @@ class UserController extends Controller
             $dataAyah->kelurahan_id = $data['kelurahan_id'];
                 $dataAyah->save();
 
-            return redirect()->route('createsIbus')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+            return redirect()->route('createsIbu');
     }
 
     /**
@@ -212,8 +211,7 @@ class UserController extends Controller
             $dataIbu->kelurahan_id = $data['kelurahan_id'];
                 $dataIbu->save();
 
-            return redirect()->route('createsSKCK')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+            return redirect()->route('createsSKCK');
     }
 
     /**
@@ -240,22 +238,17 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-        $dataIbu = new SKCK();
+        $skcks = new SKCK();
 
-            $dataIbu->nama = $data['nama'];
-            $dataIbu->umur = $data['umur'];
-            $dataIbu->agama = $data['agama'];
-            $dataIbu->kewarganegaraan = $data['kewarganegaraan'];
-            $dataIbu->pekerjaan = $data['pekerjaan'];
-            $dataIbu->alamat = $data['alamat'];
-            $dataIbu->provinsi_id = $data['provinsi_id'];
-            $dataIbu->kecamatan_id = $data['kecamatan_id'];
-            $dataIbu->kabupaten_id = $data['kabupaten_id'];
-            $dataIbu->kelurahan_id = $data['kelurahan_id'];
-                $dataIbu->save();
+            $skcks->no_skck = $data['no_skck'];
+            $skcks->no_ktp = $data['no_ktp'];
+            $skcks->keperluan = $data['keperluan'];
+            $skcks->dibuat_tanggal = $data['dibuat_tanggal'];
+            $skcks->sampai_tanggal = $data['sampai_tanggal'];
+                $skcks->save();
 
-            return redirect()->route('createsSkck')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+            return redirect()->route('user')
+                            ->with('sukses', 'Data Berhasil Disimpan !');
     }
 
 }

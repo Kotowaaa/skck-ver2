@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+    // Use Requests
 use Illuminate\Http\Request;
 use App\Http\Requests\SatwilRequest;
 use App\Http\Requests\DataDiriRequest;
@@ -9,6 +10,7 @@ use App\Http\Requests\DataAyahRequest;
 use App\Http\Requests\DataIbuRequest;
 use App\Http\Requests\SkckRequest;
 
+    // Use Models
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
@@ -39,7 +41,7 @@ class AdminController extends Controller
         $kabupaten = Kabupaten::with('satwil')->get();
         $kecamatan = Kecamatan::with('satwil')->get();
         $kelurahan = Kelurahan::with('satwil')->get();
-        $satwils = Satwil::all();
+        $satwils = Satwil::paginate(5);
         return view('satwil.index', compact('satwils', 'provinsi', 'polres', 'kecamatan', 'kabupaten', 'kelurahan'))
                 ->with('i');
     }
@@ -68,26 +70,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SatwilRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->validated();
 
         $satwils = Satwil::find($id);
-
-        $satwils->satwil = $data['satwil'];
-        $satwils->polres_id = $data['polres_id'];
-        $satwils->polsek = $data['polsek'];
-        $satwils->alamat = $data['alamat'];
-        $satwils->rt = $data['rt'];
-        $satwils->rw = $data['rw'];
-        $satwils->provinsi_id = $data['provinsi_id'];
-        $satwils->kecamatan_id = $data['kecamatan_id'];
-        $satwils->kabupaten_id = $data['kabupaten_id'];
-        $satwils->kelurahan_id = $data['kelurahan_id'];
-        $satwils->update();
+            $satwils->update($request->all());
 
         return redirect()->route('satwils')
-                        ->with('succes', 'Data Berhasil Ditambahkan !');
+                        ->with('sukses', 'Data Berhasil Diperbarui !');
 
     }
 
@@ -103,7 +93,7 @@ class AdminController extends Controller
         $satwil->delete();
 
         return redirect()->route('satwils')
-                        ->with('succes', 'Data Berhasil DiHapus !');
+                        ->with('sukses', 'Data Berhasil DiHapus !');
     }
 
     /**
@@ -121,7 +111,7 @@ class AdminController extends Controller
         $ka = Kabupaten::with('datadiri')->get();
         $k = Kecamatan::with('datadiri')->get();
         $ke = Kelurahan::with('datadiri')->get();
-        $dataDiris = dataDiri::all();
+        $dataDiris = dataDiri::paginate(5);
         return view('dataDiri.index', compact('dataDiris', 'p', 'k', 'ka', 'ke'));
     }
 
@@ -148,32 +138,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateDiri(DataDiriRequest $request, $id)
+    public function updateDiri(Request $request, $id)
     {
-        $data = $request->validated();
 
-        $dataDiri = dataDiri::find($id);
-
-            $dataDiri->nama = $data['nama'];
-            $dataDiri->tempat_lahir = $data['tempat_lahir'];
-            $dataDiri->tgl_lahir = $data['tgl_lahir'];
-            $dataDiri->jenis_kelamin = $data['jenis_kelamin'];
-            $dataDiri->status = $data['status'];
-            $dataDiri->kewarganegaraan = $data['kewarganegaraan'];
-            $dataDiri->agama = $data['agama'];
-            $dataDiri->pekerjaan = $data['pekerjaan'];
-            $dataDiri->no_telp = $data['no_telp'];
-            $dataDiri->alamat = $data['alamat'];
-            $dataDiri->provinsi_id = $data['provinsi_id'];
-            $dataDiri->kecamatan_id = $data['kecamatan_id'];
-            $dataDiri->kabupaten_id = $data['kabupaten_id'];
-            $dataDiri->kelurahan_id = $data['kelurahan_id'];
-            $dataDiri->no_e_ktp = $data['no_e_ktp'];
-            $dataDiri->no_kartu_keluarga = $data['no_kartu_keluarga'];
-            $dataDiri->update();
+        $dataDiris = dataDiri::find($id);
+            $dataDiris->update($request->all());
 
             return redirect()->route('dataDiris')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+                            ->with('sukses', 'Data Berhasil Diperbarui !');
     }
 
     /**
@@ -206,7 +178,7 @@ class AdminController extends Controller
         $kab = Kabupaten::with('dataAyah')->get();
         $ke = Kecamatan::with('dataAyah')->get();
         $kel = Kelurahan::with('dataAyah')->get();
-        $dataAyahs = dataAyah::all();
+        $dataAyahs = dataAyah::paginate(5);
         return view('dataAyah.index', compact('dataAyahs', 'pr', 'ke', 'kab', 'kel'));
     }
 
@@ -222,8 +194,8 @@ class AdminController extends Controller
         $kecamatan = Kecamatan::where('status','0')->get();
         $kabupaten = Kabupaten::where('status','0')->get();
         $kelurahan = Kelurahan::where('status','0')->get();
-        $dataAyahs = dataAyah::findOrFail($id);
-        return view('dataAyah.edit', compact('dataAyahs', 'provinsi', 'kecamatan', 'kabupaten', 'kelurahan'));
+        $dataAyah = dataAyah::findOrFail($id);
+        return view('dataAyah.edit', compact('dataAyah', 'provinsi', 'kecamatan', 'kabupaten', 'kelurahan'));
     }
 
     /**
@@ -233,26 +205,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateAyah(DataAyahRequest $request, $id)
+    public function updateAyah(Request $request, $id)
     {
-        $data = $request->validated();
 
         $dataAyah = dataAyah::find($id);
-
-        $dataAyah->nama = $data['nama'];
-        $dataAyah->umur = $data['umur'];
-        $dataAyah->agama = $data['agama'];
-        $dataAyah->kewarganegaraan = $data['kewarganegaraan'];
-        $dataAyah->pekerjaan = $data['pekerjaan'];
-        $dataAyah->alamat = $data['alamat'];
-        $dataAyah->provinsi_id = $data['provinsi_id'];
-        $dataAyah->kecamatan_id = $data['kecamatan_id'];
-        $dataAyah->kabupaten_id = $data['kabupaten_id'];
-        $dataAyah->kelurahan_id = $data['kelurahan_id'];
-            $dataAyah->update();
+            $dataAyah->update($request->all());
 
             return redirect()->route('dataAyahs')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+                            ->with('sukses', 'Data Berhasil Diperbarui !');
     }
 
     /**
@@ -267,7 +227,7 @@ class AdminController extends Controller
         $dataAyah->delete();
 
         return redirect()->route('dataAyahs')
-                        ->with('succes', 'Data Berhasil DiHapus !');
+                        ->with('sukses', 'Data Berhasil DiHapus !');
     }
 
     /**
@@ -285,7 +245,7 @@ class AdminController extends Controller
         $kabu = Kabupaten::with('dataIbu')->get();
         $kec = Kecamatan::with('dataIbu')->get();
         $kelu = Kelurahan::with('dataIbu')->get();
-        $dataIbus = dataIbu::all();
+        $dataIbus = dataIbu::paginate(5);
         return view('dataIbu.index', compact('dataIbus', 'pro', 'kabu', 'kec', 'kelu'));
     }
 
@@ -301,8 +261,8 @@ class AdminController extends Controller
         $kecamatan = Kecamatan::where('status','0')->get();
         $kabupaten = Kabupaten::where('status','0')->get();
         $kelurahan = Kelurahan::where('status','0')->get();
-        $dataIbus = dataIbu::findOrFail($id);
-        return view('dataIbu.edit', compact('dataIbus', 'provinsi', 'kecamatan', 'kabupaten', 'kelurahan'));
+        $dataIbu = dataIbu::findOrFail($id);
+        return view('dataIbu.edit', compact('dataIbu', 'provinsi', 'kecamatan', 'kabupaten', 'kelurahan'));
     }
 
     /**
@@ -312,26 +272,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateIbu(DataIbuRequest $request, $id)
+    public function updateIbu(Request $request, $id)
     {
-        $data = $request->validated();
 
         $dataIbu = dataIbu::find($id);
-
-        $dataIbu->nama = $data['nama'];
-        $dataIbu->umur = $data['umur'];
-        $dataIbu->agama = $data['agama'];
-        $dataIbu->kewarganegaraan = $data['kewarganegaraan'];
-        $dataIbu->pekerjaan = $data['pekerjaan'];
-        $dataIbu->alamat = $data['alamat'];
-        $dataIbu->provinsi_id = $data['provinsi_id'];
-        $dataIbu->kecamatan_id = $data['kecamatan_id'];
-        $dataIbu->kabupaten_id = $data['kabupaten_id'];
-        $dataIbu->kelurahan_id = $data['kelurahan_id'];
-            $dataIbu->update();
+            $dataIbu->update($request->all());
 
             return redirect()->route('dataIbus')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+                            ->with('sukses', 'Data Berhasil Diperbarui !');
     }
 
     /**
@@ -346,7 +294,7 @@ class AdminController extends Controller
         $dataIbu->delete();
 
         return redirect()->route('dataIbus')
-                        ->with('succes', 'Data Berhasil DiHapus !');
+                        ->with('sukses', 'Data Berhasil DiHapus !');
     }
 
 
@@ -361,7 +309,7 @@ class AdminController extends Controller
      */
     public function indexSKCK()
     {
-        $skcks = SKCK::all();
+        $skcks = SKCK::paginate(5);
         return view('skck.index', compact('skcks'));
     }
 
@@ -384,21 +332,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateSKCK(SkckRequest $request, $id)
+    public function updateSKCK(Request $request, $id)
     {
-        $data = $request->validated();
 
         $skcks = SKCK::find($id);
-
-        $skcks->no_skck = $data['no_skck'];
-        $skcks->no_ktp = $data['no_ktp'];
-        $skcks->keperluan = $data['keperluan'];
-        $skcks->dibuat_tanggal = $data['dibuat_tanggal'];
-        $skcks->sampai_tanggal = $data['sampai_tanggal'];
-            $skcks->update();
+            $skcks->update($request->all());
 
             return redirect()->route('skck')
-                            ->with('succes', 'Data Berhasil Ditambahkan !');
+                            ->with('sukses', 'Data Berhasil Diperbarui !');
     }
 
     /**
@@ -413,6 +354,6 @@ class AdminController extends Controller
         $skcks->delete();
 
         return redirect()->route('skck')
-                        ->with('succes', 'Data Berhasil DiHapus !');
+                        ->with('sukses', 'Data Berhasil DiHapus !');
     }
 }

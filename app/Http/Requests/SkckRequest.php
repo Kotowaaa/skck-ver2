@@ -11,7 +11,7 @@ class SkckRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,24 @@ class SkckRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules = [
+            'no_skck' => [
+                'required'
+            ],
+            'no_ktp' => [
+                'required'
+            ],
+            'keperluan' => [
+                'required'
+            ],
+            'dibuat_tanggal' => [
+                'date'
+            ],
+            'sampai_tanggal' => [
+                'date'
+            ],
         ];
+
+        return $rules;
     }
 }

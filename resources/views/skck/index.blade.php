@@ -7,13 +7,20 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
+@if ($message = Session::get('sukses'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ $message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
         <h2 class="text-white fw-bold mb-2 mt-2"> 
             List | SKCK
         </h2>
     <div class="table-responsive">
-        <table class="table table-striped nowrap text-white">
+        <table class="table table-hover table-striped nowrap text-white">
             <thead>
                 <tr>
                     <th>#</th>
@@ -35,23 +42,19 @@
                     <td class="text-white">{{ $skck->dibuat_tanggal }}</td>
                     <td class="text-white">{{ $skck->sampai_tanggal }}</td>
                     <td>
-                        <a href="{{ route('editSKCK', $skck) }}" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
-                        <a href="" class="btn btn-danger btn-sm">Hapus!</a>
+                        <a href="{{ route('editSkck', $skck->id) }}" class="btn btn-warning text-white btn-sm mb-3">Edit</a>
+                        <form action="{{ route('destroySkck', $skck->id) }}" method="post">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Apakah Yakin?')" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $skcks->links("pagination::bootstrap-5") }}
     </div>
-        <nav class="float-end" aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+
     </div>
 </div>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.home')
 
 @section('content')
 
@@ -8,9 +8,10 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
-        <form action="" method="post">
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
+        <form action="{{ route('storesAyah') }}" method="post">
+            @csrf
             <div class="col-auto mb-3">
                 <label for="satwil" class="form-label text-white">Nama lengkap</label>
                 <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama lengkap!">
@@ -92,7 +93,6 @@
             <div class="col-auto mb-3">
                 <label for="provinsi" class="form-label text-white">Kelurahan</label>
                 <select class="form-select" name="kelurahan_id" aria-label="Default select example">
-                    <option selected disabled>Pilih Kelurahan ...</option>
                     <option selected disabled>Pilih Kelurahan ...</option>
                     @foreach ($kelurahan as $kelu)
                     <option value="{{ $kelu->id }}">{{ $kelu->name }}</option>

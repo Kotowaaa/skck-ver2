@@ -8,8 +8,8 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
         <form action="{{ route('update', $satwils->id) }}" method="post">
             @csrf
             <div class="col-auto mb-3">
@@ -26,9 +26,6 @@
                     <option value="Polda Kalimantan Timur">Polda Kalimantan Timur</option>
                     <option value="Polda Kalimantan Barat">Polda Kalimantan Barat</option>
                 </select>
-                @foreach ($errors->get('satwil') as $msg)
-                <p class="text-danger">{{ $msg }}</p>
-                @endforeach
             </div>
             <div class="col-auto mb-3">
                 <div class="col-auto mb-2">
@@ -42,9 +39,6 @@
                     <option value="{{ $res->id }}">{{ $res->name }}</option>
                     @endforeach
                 </select>
-                @foreach ($errors->get('polres_id') as $msg)
-                <p class="text-danger">{{ $msg }}</p>
-                @endforeach
             </div>
             <div class="col-auto mb-3">
                 <select class="form-select" name="polsek" aria-label="Default select example">
@@ -55,9 +49,6 @@
                     <option value="Polsek Banjarmasin Selatan">Polsek Banjarmasin Selatan</option>
                     <option value="Polsek Banjarmasin Barat">Polsek Banjarmasin Barat</option>
                 </select>
-                @foreach ($errors->get('polsek') as $msg)
-                <p class="text-danger">{{ $msg }}</p>
-                @endforeach
             </div>
             <div class="col-auto mb-3">
                 <span id="satwilHelpInline" class="form-text text-white">
@@ -67,24 +58,15 @@
             <div class="col-auto mb-3">
                 <label for="alamat" class="form-label text-white">Alamat ( Sesuai KTP ) </label>
                 <textarea class="form-control" name="alamat" id="alamat" rows="3">{!! $satwils->alamat !!}</textarea>
-                @foreach ($errors->get('alamat') as $msg)
-                <p class="text-danger">{{ $msg }}</p>
-                @endforeach
 
                 <div class="row mb-3 mt-3 col-auto">
                     <div class="col">
                         <label for="rt" class="form-label text-white">RT ( Sesuai KTP ) </label>
                         <input type="text" name="rt" value="{{ $satwils->rt }}" class="form-control" placeholder="Rt" aria-label="Rt">
-                        @foreach ($errors->get('rt') as $msg)
-                        <p class="text-danger">{{ $msg }}</p>
-                        @endforeach
                     </div>
                     <div class="col">
                         <label for="rw" class="form-label text-white">RW ( Sesuai KTP ) </label>
                         <input type="text" name="rw" value="{{ $satwils->rw }}" class="form-control" placeholder="Rw" aria-label="Rw">
-                        @foreach ($errors->get('rw') as $msg)
-                        <p class="text-danger">{{ $msg }}</p>
-                        @endforeach
                     </div>
                 </div>
                 <div class="col-auto mb-3">
@@ -95,9 +77,6 @@
                         <option value="{{ $pro->id }}">{{ $pro->name }}</option>
                         @endforeach
                     </select>
-                    @foreach ($errors->get('provinsi_id') as $msg)
-                    <p class="text-danger">{{ $msg }}</p>
-                    @endforeach
                 </div>
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Kecamatan ( Sesuai KTP ) </label>
@@ -107,9 +86,6 @@
                         <option value="{{ $keca->id }}">{{ $keca->name }}</option>
                         @endforeach
                     </select>
-                    @foreach ($errors->get('kecamatan_id') as $msg)
-                    <p class="text-danger">{{ $msg }}</p>
-                    @endforeach
                 </div>
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Kabupaten / Kota ( Sesuai KTP ) </label>
@@ -119,9 +95,6 @@
                         <option value="{{ $kabu->id }}">{{ $kabu->name }}</option>
                         @endforeach
                     </select>
-                    @foreach ($errors->get('kabupaten_id') as $msg)
-                    <p class="text-danger">{{ $msg }}</p>
-                    @endforeach
                 </div>
                 <div class="col-auto mb-3">
                     <label for="provinsi" class="form-label text-white">Kelurahan ( Sesuai KTP ) </label>
@@ -131,9 +104,6 @@
                         <option value="{{ $kelu->id }}">{{ $kelu->name }}</option>
                         @endforeach
                     </select>
-                    @foreach ($errors->get('kelurahan_id') as $msg)
-                    <p class="text-danger">{{ $msg }}</p>
-                    @endforeach
                 </div>
                 <div class="col-auto mt-4">
                     <button type="submit" class="btn btn-secondary me-3">Submit</button>

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.home')
 
 @section('content')
 
@@ -8,9 +8,10 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
-        <form action="" method="post">
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
+        <form action="{{ route('storesIbu') }}" method="post">
+            @csrf
             <div class="col-auto mb-3">
                 <label for="satwil" class="form-label text-white">Nama lengkap</label>
                 <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama lengkap!">

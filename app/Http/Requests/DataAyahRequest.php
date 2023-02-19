@@ -11,7 +11,7 @@ class DataAyahRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,38 @@ class DataAyahRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules = [
+            'nama' => [
+                'required'
+            ],
+            'umur' => [
+                'required'
+            ],
+            'agama' => [
+                'required'
+            ],
+            'kewarganegaraan' => [
+                'required'
+            ],
+            'alamat' => [
+                'required'
+            ],
+            'pekerjaan' => [
+                'required'
+            ],
+            'provinsi_id' => [
+                'required', 'integer'
+            ],
+            'kecamatan_id' => [
+                'required', 'integer'
+            ],
+            'kabupaten_id' => [
+                'required', 'integer'
+            ],
+            'kelurahan_id' => [
+                'required', 'integer'
+            ],
         ];
+        return $rules;
     }
 }

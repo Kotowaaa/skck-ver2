@@ -7,20 +7,30 @@
     </h1>
 </div>
 
-<div class="card bg-dark row h-auto">
-    <div class="card-body col">
+<div class="card bg-dark mb-5 mt-2">
+    <div class="card-body">
         <form action="{{ route('storesDiri') }}" method="post">
+            @csrf
             <div class="col-auto mb-3">
                 <label for="nama" class="form-label text-white">Nama Lengkap</label>
-                <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan Nama Lengkap!">
+                <input type="text" name="namaDiri" id="nama" class="form-control" placeholder="Masukkan Nama Lengkap!">
+                @foreach ($errors->get('namaDiri') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             <div class="col-auto mb-3">
                 <label for="tempat_lahir" class="form-label text-white">Tempat Lahir</label>
                 <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" placeholder="Masukkan Tempat Lahir!">
+                @foreach ($errors->get('tempat_lahir') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             <div class="col-lg-4 mb-3">
                 <label for="tgl_lahir" class="form-label text-white">Tanggal Lahir</label>
                 <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control" placeholder="Masukkan Tanggal Lahir!">
+                @foreach ($errors->get('tgl_lahir') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             <div class="row col-auto mb-3">
                 <div class="col">
@@ -30,14 +40,20 @@
                         <option value="Laki-Laki">Laki - Laki</option>
                         <option value="Perempuan">Perempuan</option>
                     </select>
+                    @foreach ($errors->get('jenis_kelamin') as $msg)
+                    <p class="text-danger">{{ $msg }}</p>
+                    @endforeach
                 </div>
                 <div class="col">
                     <label for="status" class="form-label text-white">Status Pernikahan</label>
-                    <select class="form-select" name="status" aria-label="Default select example">
+                    <select class="form-select" name="status_pernikahan" aria-label="Default select example">
                         <option selected disabled>Pilih Status ...</option>
                         <option value="Nikah">Nikah</option>
                         <option value="Belum Nikah">Belum Nikah</option>
                     </select>
+                    @foreach ($errors->get('status_pernikahan') as $msg)
+                    <p class="text-danger">{{ $msg }}</p>
+                    @endforeach
                 </div>
                 <div class="col">
                     <label for="kewarganegaraan" class="form-label text-white">Kewarganegaraan</label>
@@ -46,6 +62,9 @@
                         <option value="WNI">WNI</option>
                         <option value="WNA">WNA</option>
                     </select>
+                    @foreach ($errors->get('kewarganegaraan') as $msg)
+                    <p class="text-danger">{{ $msg }}</p>
+                    @endforeach
                 </div>
             </div>
             <div class="row col-auto mb-3">
@@ -60,6 +79,9 @@
                         <option value="Budha">Budha</option>
                         <option value="Khonghucu">Khonghucu</option>
                     </select>
+                    @foreach ($errors->get('agama') as $msg)
+                    <p class="text-danger">{{ $msg }}</p>
+                    @endforeach
                 </div>
                 <div class="col">
                     <label for="pekerjaan" class="form-label text-white">Pekerjaan</label>
@@ -70,15 +92,24 @@
                         <option value="Karyawan Swasta">Karyawan Swasta</option>
                         <option value="Wiraswasta">Wiraswasta</option>
                     </select>
+                    @foreach ($errors->get('pekerjaan') as $msg)
+                    <p class="text-danger">{{ $msg }}</p>
+                    @endforeach
                 </div>
                 <div class="col">
                     <label for="no_telp" class="form-label text-white">No. Telp</label>
-                    <input type="number" name="no_telp" id="no_telp" class="form-control" placeholder="Masukkan No Telp!">
+                    <input type="text" name="no_telp" id="no_telp" class="form-control" placeholder="Masukkan No Telp!">
                 </div>
+                @foreach ($errors->get('no_telp') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             <div class="col-auto mb-3">
                 <label for="alamat" class="form-label text-white">Alamat ( Saat ini ) </label>
                 <textarea class="form-control" name="alamat" id="alamat" rows="3"></textarea>
+                @foreach ($errors->get('alamat') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
                 <div class="col-auto">
                     <div class="col-auto mb-3">
                         <span id="satwilHelpInline" class="form-text text-danger">
@@ -137,11 +168,17 @@
                 <div class="row col-auto mb-3">
                     <div class="col">
                         <label for="no_telp" class="form-label text-white">No. E-KTP</label>
-                        <input type="number" name="no_e-ktp" id="no_e-ktp" class="form-control" placeholder="Masukkan No E-KTP!">
+                        <input type="text" name="no_e_ktp" id="no_e-ktp" class="form-control" placeholder="Masukkan No E-KTP!">
+                        @foreach ($errors->get('no_e_ktp') as $msg)
+                        <p class="text-danger">{{ $msg }}</p>
+                        @endforeach
                     </div>
                     <div class="col">
                         <label for="no_telp" class="form-label text-white">No. Kartu Keluarga</label>
-                        <input type="number" name="no_kartu_keluarga" id="no_kartu_keluarga" class="form-control" placeholder="Masukkan No Kartu Keluarga!">
+                        <input type="text" name="no_kartu_keluarga" id="no_kartu_keluarga" class="form-control" placeholder="Masukkan No Kartu Keluarga!">
+                        @foreach ($errors->get('no_kartu_keluarga') as $msg)
+                        <p class="text-danger">{{ $msg }}</p>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-auto mb-3">

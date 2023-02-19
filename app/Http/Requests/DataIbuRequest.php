@@ -31,15 +31,15 @@ class DataIbuRequest extends FormRequest
                 'required'
             ],
             'agama' => [
-                new Enum(ServerStatus::class)
+                'required'
+            ],
+            'kewarganegaraan' => [
+                'required'
             ],
             'alamat' => [
                 'required'
             ],
-            'rt' => [
-                'required',
-            ],
-            'rw' => [
+            'pekerjaan' => [
                 'required'
             ],
             'provinsi_id' => [
